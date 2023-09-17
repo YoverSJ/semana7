@@ -31,19 +31,21 @@ public class PersonaJpaRepositoryAdapter implements PersonaRepositoryPort {
     }
 
     @Override
-    public Persona update(Persona persona) {
-        PersonaEntity personaEntity = PersonaEntity.fromDomainModel(persona);
-        PersonaEntity updatePersonaEntity = personaJpaRepository.save(personaEntity);
-        return updatePersonaEntity.toDomainModel();
+    public Optional<Persona> update(Persona persona) {
+        if (personaJpaRepository.existsById(persona.getId())){
+            PersonaEntity personaEntity = PersonaEntity.fromDomainModel(persona);
+            PersonaEntity updatePersonaEntity = personaJpaRepository.save(personaEntity);
+            return Optional.of(updatePersonaEntity.toDomainModel());
+        }
+        return Optional.empty();
     }
 
     @Override
     public Boolean delete(Long id) {
-        try{
+        if (personaJpaRepository.existsById(id)) {
             personaJpaRepository.deleteById(id);
             return true;
-        }catch (Exception e){
-            return false;
         }
+        return false;
     }
 }

@@ -10,7 +10,7 @@ public interface PersonaRepositoryPort {
 
     Optional<Persona> findById(Long id);
 
-    Persona update(Persona persona);
+    Optional<Persona> update(Persona persona);
 
     Boolean delete(Long id);
 

@@ -29,21 +29,15 @@ public class PersonaController {
 
     @PutMapping()
     public ResponseEntity<Persona> updatePersona(@RequestBody Persona persona){
-        System.out.println("TEST");
-        System.out.println(persona);
-        Persona actualizarPersona = personaService.actualizarPersona(persona);
-        return new ResponseEntity<>(actualizarPersona, HttpStatus.OK);
+        return personaService.actualizarPersona(persona).map(persona1 -> new ResponseEntity<>(persona1, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePersonaById(@PathVariable("id") Long personaId){
-       boolean res = personaService.eliminarPersona(personaId);
-
-       if (res){
-           return new ResponseEntity<>("Persona con id " + personaId + " eliminada", HttpStatus.OK);
-       }else {
-           return new ResponseEntity<>("No se pudo eliminar la Persona con id " + personaId, HttpStatus.BAD_REQUEST);
-       }
+    public ResponseEntity<Boolean> deletePersonaById(@PathVariable("id") Long personaId){
+        if (personaService.eliminarPersona(personaId)){
+            return new ResponseEntity<>(Boolean.TRUE, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(Boolean.FALSE, HttpStatus.NOT_FOUND);
     }
 
 }

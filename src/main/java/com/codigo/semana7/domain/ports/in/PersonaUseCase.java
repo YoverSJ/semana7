@@ -10,7 +10,7 @@ public interface PersonaUseCase {
 
     Optional<Persona> getPersona(Long id);
 
-    Persona actualizarPersona(Persona persona);
+    Optional<Persona> actualizarPersona(Persona persona);
 
     Boolean eliminarPersona(Long id);
 

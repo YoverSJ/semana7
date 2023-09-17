@@ -24,17 +24,12 @@ public class PersonaService implements PersonaUseCase {
     }
 
     @Override
-    public Persona actualizarPersona(Persona persona) {
+    public Optional<Persona> actualizarPersona(Persona persona) {
        return personaUseCase.actualizarPersona(persona);
     }
 
     @Override
     public Boolean eliminarPersona(Long id) {
-        boolean res = personaUseCase.eliminarPersona(id);
-        if (res){
-            return true;
-        }else {
-            return false;
-        }
+        return personaUseCase.eliminarPersona(id);
     }
 }
