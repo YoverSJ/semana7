@@ -14,6 +14,9 @@ public class Usuario {
     private String correoElectronico;
     private PersonaEntity persona;
 
+    public Usuario() {
+    }
+
     public Usuario(Long id, String nombreUsuario, String contrasenia, String correoElectronico, PersonaEntity persona) {
         this.id = id;
         this.nombreUsuario = nombreUsuario;

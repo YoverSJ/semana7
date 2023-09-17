@@ -15,6 +15,9 @@ public class Persona {
     private Date fechaNacimiento;
     private String genero;
 
+    public Persona() {
+    }
+
     public Persona(Long id, String nombre, String apellido, Date fechaNacimiento, String genero) {
         this.id = id;
         this.nombre = nombre;
